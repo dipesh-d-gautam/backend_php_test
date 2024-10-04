@@ -89,4 +89,31 @@ class CRUD
             echo "Error: " . $error->getMessage();
         }
     }
+
+    public function fetchAllProducts()
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM products");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error fetching data: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function emptyTable()
+    {
+        /* try {
+            $stmt = $this->conn->prepare("DELETE FROM products");
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error emptying table: " . $e->getMessage();
+            return false;
+        } */
+
+        // Commented out code so that data is not deleted from database
+        // For mocking purpose always returning tru
+        return true;
+    }
 }
